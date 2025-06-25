@@ -1,7 +1,3 @@
-/**
- * CSS files with the .module.css suffix will be treated as CSS modules
- * and scoped locally.
- */
 
 .heroBanner {
   padding: 4rem 0;
@@ -10,14 +6,48 @@
   overflow: hidden;
 }
 
-@media screen and (max-width: 996px) {
-  .heroBanner {
-    padding: 2rem;
-  }
+.projectsSection {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
 }
 
-.buttons {
+.projectsSection h2 {
+  margin-bottom: 4rem;
+}
+
+.separator {
+  border: 0;
+  height: 1px;
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(255, 255, 255, 0.75), rgba(0, 0, 0, 0));
+  margin-bottom: 4rem;
+}
+
+.projectImage {
+  max-width: 100%;
+  height: 200px; /* You can adjust this value */
+  object-fit: cover;
+  border-radius: 0.5rem;
+}
+
+.projectDetails h3 {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.projectDetails {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.projectContainer {
+  padding: 2rem;
+  border-radius: 0.5rem;
+}
+
+.projectBg0 {
+  background-color: #212936; /* Darker background color */
+}
+
+.projectBg1 {
+  background-color: #1F2631; /* Darker background color */
 }

@@ -5,8 +5,8 @@ import type * as Preset from '@docusaurus/preset-classic';
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 const config: Config = {
-    title: 'PCHOMIK',
-    tagline: 'Programming is cool.',
+    title: 'Paweł Chomicki',
+    tagline: 'Software developer, creator of tools and themes.',
     favicon: 'img/favicon.ico',
 
     // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
@@ -31,6 +31,18 @@ const config: Config = {
     // Even if you don't use internationalization, you can use this field to set
     // useful metadata like html lang. For example, if your site is Chinese, you
     // may want to replace "en" with "zh-Hans".
+    stylesheets: [
+        {
+            href: 'https://unpkg.com/aos@2.3.4/dist/aos.css',
+            type: 'text/css',
+        },
+    ],
+    scripts: [
+        {
+            src: 'https://unpkg.com/aos@2.3.4/dist/aos.js',
+            async: true,
+        },
+    ],
     i18n: {
         defaultLocale: 'en',
         locales: ['en'],
@@ -147,13 +159,14 @@ const config: Config = {
             //     ],
             // },
             // ],
-            copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+            copyright: `Copyright © ${new Date().getFullYear()} Paweł Chomicki`,
         },
         prism: {
             theme: prismThemes.github,
             darkTheme: prismThemes.dracula,
         },
     } satisfies Preset.ThemeConfig,
+    plugins: [require.resolve('docusaurus-plugin-search-local')],
 };
 
 export default config;
