@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Programmer Landing Page</title>
+<link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Space+Grotesk:wght@400;500;700" onload="this.rel='stylesheet'" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style type="text/tailwindcss">
+      :root {
+        --primary-color: #0c77f2;
+        --background-color: #121212;
+        --text-primary: #e0e0e0;
+        --text-secondary: #a0a0a0;
+        --accent-color: #333333;
+        --card-background: #1e1e1e;
+        --button-hover: #105bb8;
+      }
+      body {
+        font-family: 'Space Grotesk', sans-serif;
+      }
+      .top_bar {
+        @apply bg-[var(--accent-color)] py-4 rounded-md;
+      }
+      .top_bar_container {
+        @apply container mx-auto flex items-center justify-between;
+      }
+      .logo {
+        @apply text-2xl font-bold text-[var(--primary-color)];
+      }
+      .nav_links {
+        @apply flex space-x-4;
+      }
+      .nav_link {
+        @apply text-[var(--text-secondary)] hover:text-[var(--text-primary)];
+      }
+      .github_icon {
+        @apply text-[var(--text-secondary)] hover:text-[var(--text-primary)];
+      }
+      .search_bar {
+        @apply bg-[var(--card-background)] rounded-md px-3 py-2 text-[var(--text-secondary)] focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)];
+      }
+      .banner {
+        @apply bg-center bg-no-repeat bg-cover rounded-lg overflow-hidden;
+      }
+      .banner_title {
+        @apply text-4xl font-bold text-[var(--text-primary)] mb-4;
+      }
+      .banner_subtitle {
+        @apply text-lg text-[var(--text-secondary)];
+      }
+      .projects_section {
+        @apply mt-16;
+      }
+      .projects_title {
+        @apply text-3xl font-bold text-[var(--text-primary)] mb-8 text-center;
+      }
+      .project_card {
+        @apply bg-[var(--card-background)] rounded-lg p-6 shadow-md flex flex-col items-center gap-6;
+      }
+      .project_logo {
+        @apply w-24 h-24 flex items-center justify-center rounded-full bg-[var(--accent-color)];
+      }
+      .project_info {
+        @apply flex-1 text-center;
+      }
+      .project_name {
+        @apply text-2xl font-semibold text-[var(--text-primary)];
+      }
+      .project_description {
+        @apply text-[var(--text-secondary)] mt-2 mb-4;
+      }
+      .project_button {
+        @apply bg-[var(--primary-color)] hover:bg-[var(--button-hover)] text-white font-bold py-2 px-4 rounded-md focus:outline-none transition-colors duration-300;
+      }
+    </style>
+</head>
+<body class="bg-[var(--background-color)] text-[var(--text-primary)]">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+<header class="bg-[var(--accent-color)] rounded-lg shadow-lg">
+<div class="container mx-auto flex items-center justify-between p-4">
+<div class="flex items-center space-x-8">
+<a class="logo flex items-center gap-2" href="#">
+<svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<path d="M10 20l4-16m4 4l4 4-4 4"></path>
+<path d="M6 16l-4-4 4-4"></path>
+</svg>
+<span>CodeCraft</span>
+</a>
+<nav class="hidden md:flex nav_links">
+<a class="nav_link" href="#">pytest-spec</a>
+<a class="nav_link" href="#">tilo</a>
+<a class="nav_link" href="#">dark-prism</a>
+</nav>
+</div>
+<div class="flex items-center space-x-4">
+<a class="nav_link" href="#">About Me</a>
+<a class="github_icon" href="#">
+<svg fill="currentColor" height="24" viewBox="0 0 256 256" width="24" xmlns="http://www.w3.org/2000/svg">
+<path d="M208.31,75.68A59.78,59.78,0,0,0,202.93,28,8,8,0,0,0,196,24a59.75,59.75,0,0,0-48,24H124A59.75,59.75,0,0,0,76,24a8,8,0,0,0-6.93,4,59.78,59.78,0,0,0-5.38,47.68A58.14,58.14,0,0,0,56,104v8a56.06,56.06,0,0,0,48.44,55.47A39.8,39.8,0,0,0,96,192v8H72a24,24,0,0,1-24-24A40,40,0,0,0,8,136a8,8,0,0,0,0,16,24,24,0,0,1,24,24,40,40,0,0,0,40,40H96v16a8,8,0,0,0,16,0V192a24,24,0,0,1,48,0v40a8,8,0,0,0,16,0V192a39.8,39.8,0,0,0-8.44-24.53A56.06,56.06,0,0,0,216,112v-8A58.14,58.14,0,0,0,208.31,75.68ZM200,112a40,40,0,0,1-40,40H112a40,40,0,0,1-40-40v-8a41.74,41.74,0,0,1,6.9-22.48A8,8,0,0,0,80,73.83a43.81,43.81,0,0,1,.79-33.58,43.88,43.88,0,0,1,32.32,20.06A8,8,0,0,0,119.82,64h32.35a8,8,0,0,0,6.74-3.69,43.87,43.87,0,0,1,32.32-20.06A43.81,43.81,0,0,1,192,73.83a8.09,8.09,0,0,0,1,7.65A41.72,41.72,0,0,1,200,104Z"></path>
+</svg>
+</a>
+<div class="relative">
+<input class="search_bar w-32 sm:w-48" placeholder="Search" type="search"/>
+</div>
+</div>
+</div>
+</header>
+<main>
+<section class="banner mt-12 min-h-[300px] flex items-center justify-center text-center" style='background-image: linear-gradient(rgba(18, 18, 18, 0.7), rgba(18, 18, 18, 0.7)), url("https://lh3.googleusercontent.com/aida-public/AB6AXuBsRJeJQlbl7ZIdKt7_XoGG8OYtCp4BhCc-HloEuYm6cL_c_2kpo_GkY3PU9bQnAdgt9UAYNN3jbqy0wZrfqaxY_3Lla70kP2uQeH3-F78WSemhLGHy2NsQBpbPIQdh4a9GqPOIW5KyKbiBLdpKs_ARY1aKwuahF_vOPR55QLZWP007PjATMDXHBwZqASfeAOap13lcvqqO0Nm0EOwYUaHU5gcrmVxGC1BQhf9J-t2rSX0q1om4FRUDcoto5XHAHHI0Frw1iagVzTGz");'>
+<div>
+<h1 class="banner_title">Building the Future, One Line of Code at a Time</h1>
+<p class="banner_subtitle">Passionate programmer exploring the world of software development.</p>
+</div>
+</section>
+<section class="projects_section">
+<h2 class="projects_title">Featured Projects</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="project_card">
+<div class="project_logo">
+<svg class="w-12 h-12 text-[var(--primary-color)]" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+<polyline points="22 4 12 14.01 9 11.01"></polyline>
+</svg>
+</div>
+<div class="project_info">
+<h3 class="project_name">pytest-spec</h3>
+<p class="project_description">A pytest plugin to display test results in a spec-like format.</p>
+<button class="project_button">See More Details</button>
+</div>
+</div>
+<div class="project_card">
+<div class="project_logo">
+<svg class="w-12 h-12 text-[var(--primary-color)]" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+<polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+<line v1="12" v2="22.08" x1="12" x2="12"></line>
+</svg>
+</div>
+<div class="project_info">
+<h3 class="project_name">Tilo</h3>
+<p class="project_description">A simple and efficient command-line tool for task management.</p>
+<button class="project_button">See More Details</button>
+</div>
+</div>
+<div class="project_card">
+<div class="project_logo">
+<svg class="w-12 h-12 text-[var(--primary-color)]" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+</svg>
+</div>
+<div class="project_info">
+<h3 class="project_name">Dark Prism</h3>
+<p class="project_description">A sleek, dark theme for the Prism syntax highlighter.</p>
+<button class="project_button">See More Details</button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer class="mt-16 py-8 bg-[var(--accent-color)] rounded-lg">
+<div class="container mx-auto text-center text-[var(--text-secondary)]">
+<p>© 2024 CodeCraft. All rights reserved.</p>
+</div>
+</footer>
+</div>
+
+</body></html>

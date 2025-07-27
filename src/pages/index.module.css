@@ -1,4 +1,3 @@
-
 .heroBanner {
   padding: 4rem 0;
   text-align: center;
@@ -6,48 +5,102 @@
   overflow: hidden;
 }
 
+.heroTitle {
+  color: var(--text-primary);
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.heroSubtitle {
+  color: var(--text-secondary);
+  font-size: 1.25rem;
+  margin-bottom: 0;
+}
+
 .projectsSection {
-  padding-top: 4rem;
-  padding-bottom: 4rem;
+  padding: 4rem 0;
+  margin-top: 2rem;
 }
 
-.projectsSection h2 {
-  margin-bottom: 4rem;
+.projectsTitle {
+  color: var(--text-primary);
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
 }
 
-.separator {
-  border: 0;
-  height: 1px;
-  background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(255, 255, 255, 0.75), rgba(0, 0, 0, 0));
-  margin-bottom: 4rem;
-}
-
-.projectImage {
-  max-width: 100%;
-  height: 200px; /* You can adjust this value */
-  object-fit: cover;
+.projectCard {
+  background-color: var(--card-background);
   border-radius: 0.5rem;
-}
-
-.projectDetails h3 {
-  font-family: 'Montserrat', sans-serif;
-}
-
-.projectDetails {
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  align-items: center;
 }
 
-.projectContainer {
-  padding: 2rem;
-  border-radius: 0.5rem;
+.projectCard:hover {
+  transform: translateY(-2px);
 }
 
-.projectBg0 {
-  background-color: #212936; /* Darker background color */
+.projectLogo {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: var(--accent-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
 }
 
-.projectBg1 {
-  background-color: #1F2631; /* Darker background color */
+.projectInfo {
+  text-align: center;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.projectTitle {
+  color: var(--text-primary);
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.projectDescription {
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+  flex: 1;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .heroTitle {
+    font-size: 2rem;
+  }
+
+  .heroSubtitle {
+    font-size: 1rem;
+  }
+
+  .projectCard {
+    margin-bottom: 1rem;
+  }
+}
+
+/* Custom CSS variables for use in this file */
+:root {
+  --primary-color: #0c77f2;
+  --background-color: #121212;
+  --text-primary: #e0e0e0;
+  --text-secondary: #a0a0a0;
+  --accent-color: #333333;
+  --card-background: #1e1e1e;
+  --button-hover: #105bb8;
 }

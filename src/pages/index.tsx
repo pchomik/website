@@ -12,12 +12,13 @@ function HomepageHeader() {
   const {siteConfig} = useDocusaurusContext();
   return (
     <header className={clsx('hero hero--primary', styles.heroBanner)}>
-      <div className="container">
-        <img src="/img/logo.svg" alt="logo" width="150" />
-        <Heading as="h1" className="hero__title">
-          {siteConfig.title}
-        </Heading>
-        <p className="hero__subtitle">{siteConfig.tagline}</p>
+      <div className="container text--center">
+        <h1 className={styles.heroTitle}>
+          Building the Future, One Line of Code at a Time
+        </h1>
+        <p className={styles.heroSubtitle}>
+          Passionate programmer exploring the world of software development.
+        </p>
       </div>
     </header>
   );
@@ -27,49 +28,82 @@ const projects = [
   {
     title: 'pytest-spec',
     description:
-      'A pytest plugin that transforms test output into a human-readable specification format. It enhances readability by grouping tests, coloring outcomes, and cleaning up test names.',
+      'A pytest plugin to display test results in a spec-like format.',
     link: '/docs/pytest-spec/about',
-    image: '/img/pytest-spec.gif',
+    icon: (
+      <svg
+        className="w-12 h-12 text-primary"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg">
+        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+        <polyline points="22 4 12 14.01 9 11.01"></polyline>
+      </svg>
+    ),
   },
   {
     title: 'Tilo',
     description:
-      'TILO is a Python-based Tiling Windows Manager for Windows OS. It offers a convenient way to manage windows using only your keyboard, inspired by projects like komorebi and JigsawWM.',
+      'A simple and efficient command-line tool for task management.',
     link: '/docs/tilo/about',
-    image: '/img/tilo.png',
+    icon: (
+      <svg
+        className="w-12 h-12 text-primary"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg">
+        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+        <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+        <line x1="12" y1="12" x2="12" y2="22.08"></line>
+      </svg>
+    ),
   },
   {
     title: 'Dark Prism',
     description:
-      'Dark Prism is a clear and aesthetically pleasing VS Code theme. Inspired by Railscasts and Tomorrow Night, it enhances readability with distinct colors and italicized elements, especially for Python developers.',
+      'A sleek, dark theme for the Prism syntax highlighter.',
     link: '/docs/dark-prism/about',
-    image: '/img/dark-prism.png',
+    icon: (
+      <svg
+        className="w-12 h-12 text-primary"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+      </svg>
+    ),
   },
 ];
 
-function ProjectCard({title, description, link, image, index}: (typeof projects)[0] & {index: number}) {
+function ProjectCard({title, description, link, icon, index}: (typeof projects)[0] & {index: number}) {
   return (
     <div
-      className={clsx(
-        'row',
-        'margin-bottom--xl',
-        styles.projectContainer,
-        index % 2 === 0 ? styles.projectBg0 : styles.projectBg1,
-      )}
-      data-aos={index % 2 === 0 ? 'fade-right' : 'fade-left'}>
-      <div className="col col--4">
-        <div className="text--center">
-          <img src={image} alt={title} className={styles.projectImage} />
+      className={clsx('col', 'col--4')}
+      data-aos="fade-up"
+      data-aos-delay={index * 100}>
+      <div className={styles.projectCard}>
+        <div className={styles.projectLogo}>
+          {icon}
         </div>
-      </div>
-      <div className={clsx('col', 'col--8', styles.projectDetails)}>
-        <div>
-          <Heading as="h3">{title}</Heading>
-          <p>{description}</p>
-        </div>
-        <div>
+        <div className={styles.projectInfo}>
+          <Heading as="h3" className={styles.projectTitle}>
+            {title}
+          </Heading>
+          <p className={styles.projectDescription}>{description}</p>
           <Link to={link} className="button button--primary">
-            Learn More
+            See More Details
           </Link>
         </div>
       </div>
@@ -77,32 +111,36 @@ function ProjectCard({title, description, link, image, index}: (typeof projects)
   );
 }
 
-export default function Home(): JSX.Element {
+export default function Home() {
   const {siteConfig} = useDocusaurusContext();
 
   useEffect(() => {
-    AOS.init();
+    AOS.init({
+      duration: 800,
+      once: true,
+    });
   }, []);
 
   return (
     <Layout
-      title={`Hello from ${siteConfig.title}`}
-      description="Description will go into a meta tag in <head />">
+      title={`${siteConfig.title} - Building the Future, One Line of Code at a Time`}
+      description="Passionate programmer exploring the world of software development.">
       <HomepageHeader />
       <main>
         <section className={styles.projectsSection}>
           <div className="container">
             <div className="row">
-              <div className="col col--12">
-                <Heading as="h2" className="text--center margin-bottom--lg">
-                  My Projects
+              <div className="col col--12 text--center">
+                <Heading as="h2" className={styles.projectsTitle}>
+                  Featured Projects
                 </Heading>
-                <hr className={styles.separator} />
               </div>
             </div>
-            {projects.map((project, idx) => (
-              <ProjectCard key={idx} index={idx} {...project} />
-            ))}
+            <div className="row">
+              {projects.map((project, idx) => (
+                <ProjectCard key={idx} index={idx} {...project} />
+              ))}
+            </div>
           </div>
         </section>
       </main>
