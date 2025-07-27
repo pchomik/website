@@ -123,7 +123,7 @@ export default function Home() {
 
   return (
     <Layout
-      title={`${siteConfig.title} - Building the Future, One Line of Code at a Time`}
+      title={`${siteConfig.title}`}
       description="Passionate programmer exploring the world of software development.">
       <HomepageHeader />
       <main>
