@@ -1,17 +1,25 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Family+Grotesk+Neue:wght@400;500;700&display=swap');
 
+/* Force :root variables to take precedence with higher specificity */
 :root {
-  --primary-color: #0c77f2;
-  --background-color: #121212;
-  --text-primary: #e0e0e0;
-  --text-secondary: #a0a0a0;
-  --accent-color: #333333;
-  --card-background: #1e1e1e;
-  --button-hover: #105bb8;
+  --primary-color: #368ae9 !important;
+  --background-color: #181818 !important;
+  --text-primary: #c0c0c0 !important;
+  --text-secondary: #808080 !important;
+  --accent-color: #333333 !important;
+  --card-background: #1e1e1e !important;
+  --button-hover: #368ae9 !important;
+  --ifm-font-weight-bold: 700 !important;
+  --ifm-link-color: #368ae9 !important;
+  --ifm-menu-color-active: #368ae9 !important;
+  --ifm-breadcrumb-color-active: #368ae9 !important;
+
 }
 
+
 body {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Family Grotesk Neue', 'Familjen Grotesk', sans-serif;
   background-color: var(--background-color);
   color: var(--text-primary);
 }
@@ -541,3 +549,14 @@ body[data-theme="dark"] .DocSearch-Modal,
     var(--ifm-color-emphasis-100) 100%
   );
 }
+
+strong {
+    color: #368ae9;
+}
+
+.markdown {
+    font-size: 1rem;
+    line-height: 1.5;
+    text-rendering: optimizeLegibility;
+}
+

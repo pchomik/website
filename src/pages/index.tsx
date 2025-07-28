@@ -48,7 +48,7 @@ const projects = [
   {
     title: 'Tilo',
     description:
-      'A simple and efficient command-line tool for task management.',
+      'A simple tiling window manager for Windows written in Python.',
     link: '/docs/tilo/about',
     icon: (
       <svg
@@ -69,7 +69,7 @@ const projects = [
   {
     title: 'Dark Prism',
     description:
-      'A sleek, dark theme for the Prism syntax highlighter.',
+      'The Visual Studion Code theme especially designed for Python developers.',
     link: '/docs/dark-prism/about',
     icon: (
       <svg
