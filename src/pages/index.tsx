@@ -49,9 +49,9 @@ const projects = [
   {
     title: 'Tilo',
     description:
-      'A simple tiling window manager for Windows written in Python.',
+      'A simple tiling window manager for Windows written in Python. Currently inactive - repository is private.',
     link: '/docs/tilo/about',
-    githubUrl: 'https://github.com/pchomik/tilo',
+    githubUrl: null, // Disabled - repository is private
     icon: (
       <svg
         className="w-12 h-12 text-primary"
