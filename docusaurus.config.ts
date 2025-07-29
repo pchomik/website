@@ -130,8 +130,9 @@ const config: Config = {
             copyright: `© ${new Date().getFullYear()} Paweł Chomiki. All rights reserved.`,
         },
         prism: {
-            theme: prismThemes.github,
-            darkTheme: prismThemes.dracula,
+            theme: prismThemes.oneDark,
+            darkTheme: prismThemes.oneDark,
+            additionalLanguages: ['toml', 'ini', 'properties'],
         },
     },
     plugins: [require.resolve('docusaurus-plugin-search-local')],
