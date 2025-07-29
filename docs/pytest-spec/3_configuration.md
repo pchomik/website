@@ -63,6 +63,7 @@ spec_header_format = "{module_path}:"
 
 **Available variables:**
 
+-   `{module_name}` - Name of the test module
 -   `{module_path}` - Path to the test module
 -   `{class_name}` - Name of the test class (if applicable)
 -   `{test_case}` - Human-readable test case name
@@ -175,7 +176,7 @@ Here's a complete example configuration in pyproject.toml:
 
 ```toml
 [tool.pytest.ini_options]
-spec_header_format = "{module_path} - {class_name}:"
+spec_header_format = "{module_name} - {module_path} - {class_name} - {test_case}:"
 spec_test_format = "{result} {docstring_summary}"
 spec_success_indicator = "✅"
 spec_failure_indicator = "❌"
@@ -183,3 +184,7 @@ spec_skipped_indicator = "⏭️"
 spec_ignore = "FLAKE8,ISORT"
 spec_indent = "    "
 ```
+
+The result may look like below:
+
+![](/img/pytest-complete-example.png)
