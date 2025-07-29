@@ -49,7 +49,7 @@ const projects = [
   {
     title: 'Tilo',
     description:
-      'A simple tiling window manager for Windows written in Python. Currently inactive - repository is private.',
+      'A simple tiling window manager for Windows written in Python.',
     link: '/docs/tilo/about',
     githubUrl: null, // Disabled - repository is private
     icon: (
