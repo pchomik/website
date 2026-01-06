@@ -135,7 +135,10 @@ const config: Config = {
             additionalLanguages: ['toml', 'ini', 'properties'],
         },
     },
-    plugins: [require.resolve('docusaurus-plugin-search-local')],
+    plugins: [
+        require.resolve('docusaurus-plugin-search-local'),
+        "./src/plugins/tailwind-config.js"
+    ],
 };
 
 export default config;

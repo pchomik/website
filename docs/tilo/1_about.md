@@ -2,7 +2,7 @@
 hide_table_of_contents: true
 ---
 
-# 🚧 About Tilo
+# About Tilo
 
 **Something exciting is brewing behind the scenes!** 🎉
 
@@ -14,11 +14,11 @@ I'm working tirelessly to bring you a polished, functional, and valuable experie
 
 Here's what I'm focusing on:
 
--   ✅ **Core functionality** - Building the foundation
--   🔧 **Performance optimization** - Making it fast and efficient
--   🎨 **User experience** - Creating an intuitive interface
--   🧪 **Testing & validation** - Ensuring reliability
--   📚 **Documentation** - Making it easy to get started
+-   **Core functionality** - Building the foundation
+-   **Performance optimization** - Making it fast and efficient
+-   **User experience** - Creating an intuitive interface
+-   **Testing & validation** - Ensuring reliability
+-   **Documentation** - Making it easy to get started
 
 ## Coming Soon!
 

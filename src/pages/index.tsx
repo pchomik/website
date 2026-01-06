@@ -7,18 +7,24 @@ import Heading from '@theme/Heading';
 import AOS from 'aos';
 
 import styles from './index.module.css';
+import HeroBackground from '../components/HeroBackground';
+import HeroTerminal from '../components/HeroTerminal';
 
 function HomepageHeader() {
   const {siteConfig} = useDocusaurusContext();
   return (
     <header className={clsx('hero hero--primary', styles.heroBanner)}>
-      <div className="container text--center">
-        <h1 className={styles.heroTitle}>
+      <HeroBackground />
+      <div className="container text--center" style={{position: 'relative', zIndex: 1}}>
+        <h1 className={styles.heroTitle} data-aos="fade-up">
           Building the Future, One Line of Code at a Time
         </h1>
-        <p className={styles.heroSubtitle}>
+        <p className={styles.heroSubtitle} data-aos="fade-up" data-aos-delay="200">
           Passionate programmer exploring the world of software development.
         </p>
+        <div className="mt-8" data-aos="fade-up" data-aos-delay="300">
+          <HeroTerminal />
+        </div>
       </div>
     </header>
   );
