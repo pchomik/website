@@ -6,3 +6,4 @@ build
 .github/instructions
 .github/agents
 .github/plans
+.github/commit.instruction.md
