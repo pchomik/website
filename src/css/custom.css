@@ -264,10 +264,9 @@ body {
 }
 
 .project-card img {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  margin-bottom: 1rem;
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
 }
 
 .project-card h3 {
@@ -671,12 +670,12 @@ body[data-theme="dark"] .DocSearch-Modal,
 .navbar-icon-link svg {
   width: 24px;
   height: 24px;
-  fill: var(--text-secondary);
+  fill: #ffffff;
   transition: fill 0.3s ease;
 }
 
 .navbar-icon-link:hover svg {
-  fill: var(--text-primary);
+  fill: #ffffff;
 }
 
 [data-theme='dark'] .DocSearch {
@@ -838,9 +837,7 @@ strong {
 .markdown img {
     max-width: 100%;
     height: auto;
-    border-radius: var(--radius);
-    margin: 1.5rem 0;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+    border-radius: 0.5rem;
 }
 
 .markdown hr {
@@ -889,6 +886,14 @@ strong {
 .breadcrumbs__item--active .breadcrumbs__link {
     color: var(--ifm-breadcrumb-color-active);
 }
+
+/* Align home icon vertically with breadcrumb text */
+.breadcrumbHomeIcon_YNFT {
+    vertical-align: middle !important;
+    top: 0 !important;
+    display: inline-block !important;
+}
+
 /* .breadcrumbs {
     color: var(--muted-foreground);
 }
@@ -987,4 +992,9 @@ strong {
 
 .markdown ol, .markdown ul, .markdown menu {
     list-style: disc;
+}
+
+/* Global image styling - all images rounded */
+img {
+    border-radius: 0.5rem;
 }
