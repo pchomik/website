@@ -31,10 +31,10 @@
 }
 
 .projectCard {
-  background: var(--card-alpha-60);
+  background: rgba(from var(--card) r g b / 0.6);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--muted-foreground-alpha-10);
+  border: 1px solid rgba(from var(--muted-foreground) r g b / 0.1);
   border-radius: 1rem;
   padding: 2rem;
   margin-bottom: 2rem;
@@ -59,7 +59,7 @@
   bottom: 0;
   background: radial-gradient(
     800px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-    var(--primary-alpha-06),
+    rgba(from var(--primary) r g b / 0.06),
     transparent 40%
   );
   opacity: 0;
@@ -76,7 +76,7 @@
   box-shadow:
     0 20px 25px -5px rgba(0, 0, 0, 0.2),
     0 10px 10px -5px rgba(0, 0, 0, 0.1);
-  border-color: var(--primary-alpha-20);
+  border-color: rgba(from var(--primary) r g b / 0.2);
 }
 
 .projectLogo {
@@ -88,13 +88,13 @@
   align-items: center;
   justify-content: center;
   margin-bottom: 1.5rem;
-  box-shadow: 0 4px 12px var(--primary-alpha-30);
+  box-shadow: 0 4px 12px rgba(from var(--primary) r g b / 0.3);
   transition: all 0.3s ease;
 }
 
 .projectCard:hover .projectLogo {
   transform: scale(1.1) rotate(5deg);
-  box-shadow: 0 8px 16px var(--primary-alpha-40);
+  box-shadow: 0 8px 16px rgba(from var(--primary) r g b / 0.4);
 }
 
 .projectInfo {
