@@ -27,3 +27,4 @@ A huge thank you to everyone who has contributed to pytest-spec by creating issu
 - [@yk-kd](https://github.com/yk-kd)
 - [@benfairless](https://github.com/benfairless)
 - [@damienflament](https://github.com/damienflament)
+- [@joshuaprior](https://github.com/joshuaprior)

@@ -68,6 +68,36 @@ spec_header_format = "{module_path}:"
 -   `{class_name}` - Name of the test class (if applicable)
 -   `{test_case}` - Human-readable test case name
 
+### Test Container Formatting
+
+**Option:** `spec_container_format`
+
+You can configure the format of test container names (e.g., `describe_*` or `Test*` classes/methods) using format strings:
+
+```ini
+[pytest]
+spec_container_format = {sentence}:
+```
+
+```toml
+[tool.pytest.ini_options]
+spec_container_format = "{sentence}:"
+```
+
+**Available variables:**
+
+-   `{sentence}` - Capitalize the first letter, replace underscores with spaces, and remove the `describe_` prefix.
+-   `{unit_name}` - Raw name with the `describe_` prefix removed, while underscores are preserved.
+
+**Formatted Output Examples:**
+
+| Format | Test Container | Formatted Output |
+| :--- | :--- | :--- |
+| `sentence` | `class TestFibonacciSequence` | Fibonacci Sequence |
+| `sentence` | `def describe_fibonacci_sequence()` | Fibonacci sequence |
+| `unit_name` | `class TestFibonacciSequence` | FibonacciSequence |
+| `unit_name` | `def describe_fibonacci_sequence()` | fibonacci_sequence |
+
 ### Test Result Formatting
 
 **Option:** `spec_test_format`
@@ -177,6 +207,7 @@ Here's a complete example configuration in pyproject.toml:
 ```toml
 [tool.pytest.ini_options]
 spec_header_format = "{module_name} - {module_path} - {class_name} - {test_case}:"
+spec_container_format = "{sentence}:"
 spec_test_format = "{result} {docstring_summary}"
 spec_success_indicator = "✅"
 spec_failure_indicator = "❌"

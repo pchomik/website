@@ -40,10 +40,12 @@ To install with all development and testing dependencies:
 uv sync --all-extras --dev
 ```
 
-### To Build the Package
+### For Build or Deployment
 
-To build the package after installation:
+To build and deploy the package from source:
 
 ```bash
+uv sync
 uv build
+uv publish
 ```
