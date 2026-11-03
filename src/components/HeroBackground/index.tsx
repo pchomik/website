@@ -2,11 +2,14 @@ import React, {useEffect, useRef} from 'react';
 import {ParticleEngine} from './ParticleEngine';
 
 /**
- * HeroBackground - Canvas-based particle constellation
+ * HeroBackground - Canvas-based project growth
  * Features:
- * - Responsive particle count (80 desktop, 40 mobile)
- * - Mouse parallax interaction
- * - Smooth floating animation
+ * - Each cluster is a repository: a tree of modules and leaves
+ * - Leaves grow and get pruned, modules switch language colors
+ * - Projects retire and respawn
+ * - Responsive node budget (120 desktop, 60 mobile)
+ * - Mouse nudges nearby nodes
+ * - Static frame when reduced motion is preferred
  * - Automatic cleanup on unmount
  */
 
@@ -20,14 +23,14 @@ export default function HeroBackground() {
 
     // Determine particle count based on screen width
     const isMobile = window.innerWidth < 768;
-    const particleCount = isMobile ? 40 : 80;
+    const nodeCount = isMobile ? 60 : 120;
 
     // Initialize particle engine
-    const engine = new ParticleEngine(canvas, particleCount);
+    const engine = new ParticleEngine(canvas, nodeCount);
     engineRef.current = engine;
 
-    // Start animation
-    engine.start();
+    // Start animation unless the user prefers reduced motion
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) engine.start();
 
     // Cleanup on unmount
     return () => {

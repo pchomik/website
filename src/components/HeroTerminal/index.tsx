@@ -16,14 +16,22 @@ interface HeroTerminalProps {
   showLineNumbers?: boolean;
 }
 
-const DEFAULT_CODE = `class Developer:
+const DEFAULT_CODE = `class Feature:
     def __init__(self):
-        self.passion = "Build the Future"
-        self.mission = "One Line at a Time"
-        self.stack = ["Python", "TypeScript", "Go", "Bash", "Full‑Stack"]
+        self.idea = "Your next big thing"
+        self.status = "Shipped before coffee gets cold"
 
-    def create(self, vision):
-        return vision.to_reality()`;
+    def build(self, requirements):
+        return requirements.to_reality()
+
+    def test(self):
+        return "All tests passed"
+
+    def fix(self):
+        raise NotImplementedError
+
+    def deploy(self):
+        return "Shipped to production"`;
 
 export default function HeroTerminal({
   code = DEFAULT_CODE,
@@ -65,7 +73,9 @@ export default function HeroTerminal({
     };
   }, [code, typingSpeed]);
 
-  const lines = displayText.split('\n');
+  // Full code sets the final height from the start; untyped text stays invisible.
+  const typedLines = displayText.split('\n');
+  const lines = code.split('\n');
 
   return (
     <div
@@ -90,11 +100,13 @@ export default function HeroTerminal({
           </div>
         )}
         <div className="flex-1 text-left">
-          {lines.map((line, i) => (
+          {lines.map((line, i) => {
+            const typed = typedLines[i] ?? '';
+            return (
             <div key={i} className="whitespace-pre-wrap break-words">
               {/* Simple syntax highlighting for Python-like code */}
-              {line.split(/(class|def|self|return|import|from|passion|mission|stack|create|vision|to_reality)/).map((part, j) => {
-                const isKeyword = ['class', 'def', 'return', 'import', 'from'].includes(part);
+              {typed.split(/(class|def|self|return|raise|import|from|passion|mission|stack|create|vision|to_reality)/).map((part, j) => {
+                const isKeyword = ['class', 'def', 'return', 'raise', 'import', 'from'].includes(part);
                 const isSelf = part === 'self';
                 const isString = part.startsWith('"') || part.startsWith("'");
 
@@ -109,15 +121,17 @@ export default function HeroTerminal({
                   </span>
                 );
               })}
-              {/* Blinking cursor on last line */}
-              {i === lines.length - 1 && isTyping && (
+              {/* Blinking cursor on last typed line */}
+              {i === typedLines.length - 1 && isTyping && (
                 <span
                   className="inline-block w-2 h-4 bg-white/80 ml-1 animate-pulse"
                   style={{animationDuration: '1s'}}
                 />
               )}
+              <span className="invisible">{line.slice(typed.length) || '\u00a0'}</span>
             </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </div>

@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hero background proposals</title>
+<style>
+  :root {
+    --bg: #15161c;
+    --card: #1d1f28;
+    --text: #eef0f7;
+    --muted: #9aa0b4;
+    --cyan: #22d3ee;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    padding: 48px 24px;
+  }
+  h1 { font-size: 32px; margin: 0 0 8px; text-align: center; }
+  .intro { color: var(--muted); margin: 0 auto 40px; text-align: center; max-width: 640px; }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
+    gap: 28px;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+  .card { background: var(--card); border-radius: 16px; overflow: hidden; border: 1px solid #2a2d3a; }
+  .stage { position: relative; height: 340px; background: var(--bg); overflow: hidden; }
+  .stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .stage::after {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background: radial-gradient(ellipse at center, transparent 35%, rgba(21, 22, 28, 0.8) 100%);
+  }
+  .hero {
+    position: absolute; inset: 0; z-index: 1;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; padding: 24px;
+  }
+  .hero h2 { font-size: 40px; line-height: 1.1; margin: 0; font-weight: 700; text-shadow: 0 2px 24px rgba(0, 0, 0, 0.7); }
+  .hero p { color: #d3d7e6; margin: 12px 0 0; max-width: 420px; font-size: 15px; text-shadow: 0 1px 12px rgba(0, 0, 0, 0.8); }
+  .word {
+    background: linear-gradient(90deg, #22d3ee, #a855f7);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .info { padding: 18px 20px 20px; }
+  .tag {
+    display: inline-block; font-size: 12px; color: var(--cyan);
+    border: 1px solid currentColor; border-radius: 999px; padding: 1px 8px; margin-bottom: 8px;
+  }
+  .info h3 { margin: 0 0 6px; font-size: 18px; }
+  .info p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.5; }
+  @media (max-width: 520px) { .grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+  <h1>Hero background proposals</h1>
+  <p class="intro">Four animated backgrounds for the home hero. Move the mouse over each preview. Headline and text sit above a vignette so they stay readable.</p>
+
+  <div class="grid">
+    <section class="card">
+      <div class="stage" data-variant="mesh"></div>
+      <div class="info">
+        <span class="tag">Recommended</span>
+        <h3>A. Agent mesh</h3>
+        <p>Nodes are agents. Glowing packets hop between them like messages or tool calls. Nodes pulse on receive. Cursor nudges nearby nodes.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="stage" data-variant="lanes"></div>
+      <div class="info">
+        <h3>B. Pipeline lanes</h3>
+        <p>Parallel data lanes with comet-like events streaming left to right. Reads as CI/CD or event streaming.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="stage" data-variant="stream"></div>
+      <div class="info">
+        <h3>C. Code stream</h3>
+        <p>Falling code glyphs in columns, like a terminal or IDE. Most literal "developer" feel. Densest of the four.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="stage" data-variant="field"></div>
+      <div class="info">
+        <h3>D. Agent flow field</h3>
+        <p>Hundreds of trajectories follow a shifting vector field and leave colored trails. Generative and calm, evokes agent paths.</p>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    const BG = '#15161c';
+    const PALETTE = ['#3b82f6', '#a855f7', '#22d3ee', '#22f5a0', '#ff5c7a'];
+    const SYMBOLS = '01{}<>/=;()[]+*&|.:';
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
+    const rgba = (hex, a) => {
+      const n = parseInt(hex.slice(1), 16);
+      return `rgba(${n >> 16}, ${(n >> 8) & 255}, ${n & 255}, ${a})`;
+    };
+
+    const VARIANTS = {
+      mesh: {
+        init(w, h) {
+          const nodes = Array.from({length: Math.round((w * h) / 16000)}, () => ({
+            x: Math.random() * w, y: Math.random() * h,
+            vx: (Math.random() - 0.5) * 0.3, vy: (Math.random() - 0.5) * 0.3,
+            c: pick(PALETTE), r: 2 + Math.random() * 1.5, pulse: 0,
+          }));
+          return {nodes, packets: []};
+        },
+        frame(ctx, s, w, h, t, p) {
+          const LINK = 160;
+          const {nodes} = s;
+          const near = (i, exclude = -1) => {
+            const out = [];
+            for (let j = 0; j < nodes.length; j++) {
+              if (j !== i && j !== exclude && Math.hypot(nodes[j].x - nodes[i].x, nodes[j].y - nodes[i].y) < LINK) out.push(j);
+            }
+            return out;
+          };
+
+          ctx.clearRect(0, 0, w, h);
+          for (const n of nodes) {
+            if (p.active) {
+              const dx = n.x - p.x, dy = n.y - p.y, d = Math.hypot(dx, dy);
+              if (d > 0 && d < 130) { n.vx += (dx / d) * 0.02; n.vy += (dy / d) * 0.02; }
+            }
+            const sp = Math.hypot(n.vx, n.vy);
+            if (sp > 0.6) { n.vx *= 0.6 / sp; n.vy *= 0.6 / sp; }
+            n.x = (n.x + n.vx + w) % w;
+            n.y = (n.y + n.vy + h) % h;
+          }
+
+          // links
+          for (let i = 0; i < nodes.length; i++) {
+            for (let j = i + 1; j < nodes.length; j++) {
+              const d = Math.hypot(nodes[i].x - nodes[j].x, nodes[i].y - nodes[j].y);
+              if (d < LINK) {
+                ctx.beginPath();
+                ctx.moveTo(nodes[i].x, nodes[i].y);
+                ctx.lineTo(nodes[j].x, nodes[j].y);
+                ctx.strokeStyle = rgba('#3b82f6', (1 - d / LINK) * 0.45);
+                ctx.lineWidth = 0.8;
+                ctx.stroke();
+              }
+            }
+          }
+
+          // packets
+          if (s.packets.length < Math.min(nodes.length / 2, 30) && Math.random() < 0.08) {
+            const a = Math.floor(Math.random() * nodes.length);
+            const nb = near(a);
+            if (nb.length) s.packets.push({a, b: pick(nb), p: 0, hops: 0, s: 0.012 + Math.random() * 0.01, c: nodes[a].c});
+          }
+          const alive = [];
+          for (const k of s.packets) {
+            k.p += k.s;
+            if (k.p < 1) { alive.push(k); continue; }
+            nodes[k.b].pulse = 1;
+            if (k.hops < 3) {
+              const nb = near(k.b, k.a);
+              if (nb.length) alive.push({a: k.b, b: pick(nb), p: 0, hops: k.hops + 1, s: k.s, c: nodes[k.b].c});
+            }
+          }
+          s.packets = alive;
+
+          for (const n of nodes) {
+            if (n.pulse > 0.01) {
+              n.pulse *= 0.93;
+              ctx.beginPath();
+              ctx.arc(n.x, n.y, n.r + (1 - n.pulse) * 14, 0, Math.PI * 2);
+              ctx.strokeStyle = rgba(n.c, n.pulse * 0.8);
+              ctx.lineWidth = 1.5;
+              ctx.stroke();
+            }
+            ctx.shadowBlur = 10; ctx.shadowColor = n.c;
+            ctx.fillStyle = n.c;
+            ctx.beginPath(); ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2); ctx.fill();
+            ctx.shadowBlur = 0;
+          }
+
+          for (const k of s.packets) {
+            const A = nodes[k.a], B = nodes[k.b];
+            const x = A.x + (B.x - A.x) * k.p, y = A.y + (B.y - A.y) * k.p;
+            ctx.shadowBlur = 14; ctx.shadowColor = k.c;
+            ctx.fillStyle = '#ffffff';
+            ctx.beginPath(); ctx.arc(x, y, 2.2, 0, Math.PI * 2); ctx.fill();
+            ctx.shadowBlur = 0;
+          }
+        },
+      },
+
+      lanes: {
+        init(w, h) {
+          const n = 8;
+          const lanes = Array.from({length: n}, (_, i) => ({
+            y: (h * (i + 0.5)) / n,
+            amp: 18 + Math.random() * 40,
+            f: 0.002 + Math.random() * 0.003,
+            ph: Math.random() * Math.PI * 2,
+            c: PALETTE[i % PALETTE.length],
+            pk: [0, 1].map(() => ({x: Math.random() * w, v: 0.8 + Math.random() * 1.8})),
+          }));
+          return {lanes};
+        },
+        frame(ctx, s, w, h, t) {
+          ctx.clearRect(0, 0, w, h);
+          const yAt = (L, x) => L.y + L.amp * Math.sin(x * L.f + L.ph + t * 0.0004);
+          for (const L of s.lanes) {
+            ctx.beginPath();
+            for (let x = 0; x <= w; x += 10) (x ? ctx.lineTo(x, yAt(L, x)) : ctx.moveTo(x, yAt(L, x)));
+            ctx.strokeStyle = rgba(L.c, 0.22);
+            ctx.lineWidth = 1;
+            ctx.stroke();
+
+            for (const k of L.pk) {
+              k.x += k.v;
+              if (k.x > w + 120) k.x = -120;
+              for (let i = 0; i < 24; i++) {
+                const x1 = k.x - i * 4, x2 = k.x - (i + 1) * 4;
+                ctx.beginPath();
+                ctx.moveTo(x1, yAt(L, x1)); ctx.lineTo(x2, yAt(L, x2));
+                ctx.strokeStyle = rgba(L.c, (1 - i / 24) * 0.9);
+                ctx.lineWidth = 2.5 * (1 - i / 30);
+                ctx.stroke();
+              }
+              ctx.shadowBlur = 16; ctx.shadowColor = L.c;
+              ctx.fillStyle = '#ffffff';
+              ctx.beginPath(); ctx.arc(k.x, yAt(L, k.x), 2.2, 0, Math.PI * 2); ctx.fill();
+              ctx.shadowBlur = 0;
+            }
+          }
+        },
+      },
+
+      stream: {
+        init(w) {
+          return {cols: Array.from({length: Math.floor(w / 16)}, (_, i) => ({
+            x: i * 16 + 4, y: -Math.random() * 400, v: 1.5 + Math.random() * 3, c: pick(PALETTE),
+          }))};
+        },
+        frame(ctx, s, w, h) {
+          ctx.fillStyle = rgba(BG, 0.12);
+          ctx.fillRect(0, 0, w, h);
+          ctx.font = '14px "IBM Plex Mono", ui-monospace, monospace';
+          ctx.textBaseline = 'top';
+          for (const c of s.cols) {
+            const ch = SYMBOLS[Math.floor(Math.random() * SYMBOLS.length)];
+            ctx.shadowBlur = 8; ctx.shadowColor = c.c;
+            ctx.fillStyle = Math.random() < 0.1 ? '#ffffff' : c.c;
+            ctx.fillText(ch, c.x, c.y);
+            ctx.shadowBlur = 0;
+            c.y += c.v;
+            if (c.y > h) { c.y = -20 - Math.random() * 200; c.v = 1.5 + Math.random() * 3; c.c = pick(PALETTE); }
+          }
+        },
+      },
+
+      field: {
+        init(w, h) {
+          return {ps: Array.from({length: Math.round((w * h) / 2200)}, () => spawn(w, h))};
+        },
+        frame(ctx, s, w, h, t) {
+          ctx.fillStyle = rgba(BG, 0.05);
+          ctx.fillRect(0, 0, w, h);
+          ctx.lineWidth = 1.3;
+          for (const p of s.ps) {
+            const a = (Math.sin(p.x * 0.004 + t * 0.0004) + Math.cos(p.y * 0.005 - t * 0.0003)) * Math.PI;
+            const nx = p.x + Math.cos(a) * 1.3, ny = p.y + Math.sin(a) * 1.3;
+            ctx.strokeStyle = rgba(p.c, 0.7);
+            ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(nx, ny); ctx.stroke();
+            p.x = nx; p.y = ny;
+            if (--p.life < 0 || p.x < 0 || p.x > w || p.y < 0 || p.y > h) Object.assign(p, spawn(w, h));
+          }
+        },
+      },
+    };
+
+    function spawn(w, h) {
+      return {x: Math.random() * w, y: Math.random() * h, c: pick(PALETTE), life: 120 + Math.random() * 200};
+    }
+
+    function mount(stage, variant) {
+      const canvas = document.createElement('canvas');
+      stage.prepend(canvas);
+      const ctx = canvas.getContext('2d');
+      const pointer = {x: 0, y: 0, active: false};
+      stage.addEventListener('pointermove', (e) => {
+        const r = stage.getBoundingClientRect();
+        pointer.x = e.clientX - r.left; pointer.y = e.clientY - r.top; pointer.active = true;
+      });
+      stage.addEventListener('pointerleave', () => { pointer.active = false; });
+
+      let w, h, s, raf;
+      const paint = () => {
+        if (reduce) {
+          // static snapshot: run simulation ahead, no animation loop
+          for (let i = 0; i < 120; i++) variant.frame(ctx, s, w, h, i * 16, pointer);
+          return;
+        }
+        const loop = (t) => { variant.frame(ctx, s, w, h, t, pointer); raf = requestAnimationFrame(loop); };
+        cancelAnimationFrame(raf);
+        raf = requestAnimationFrame(loop);
+      };
+      const resize = () => {
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        w = stage.clientWidth; h = stage.clientHeight;
+        canvas.width = w * dpr; canvas.height = h * dpr;
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        s = variant.init(w, h);
+        if (reduce) paint();
+      };
+      new ResizeObserver(resize).observe(stage);
+      resize();
+      if (!reduce) paint();
+    }
+
+    document.querySelectorAll('[data-variant]').forEach((stage) => {
+      const variant = VARIANTS[stage.dataset.variant];
+      const hero = document.createElement('div');
+      hero.className = 'hero';
+      hero.innerHTML = '<h2>Turn ideas into <span class="word">software</span>.</h2>' +
+        '<p>Passionate programmer exploring software development, from clean backend to polished interface.</p>';
+      stage.appendChild(hero);
+      mount(stage, variant);
+    });
+  </script>
+</body>
+</html>

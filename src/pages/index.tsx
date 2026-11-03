@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import clsx from 'clsx';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
@@ -10,6 +10,22 @@ import styles from './index.module.css';
 import HeroBackground from '../components/HeroBackground';
 import HeroTerminal from '../components/HeroTerminal';
 
+const HEADLINE_WORDS = ['features', 'products', 'software', 'reality'];
+
+function RotatingWord() {
+  const [index, setIndex] = useState(0);
+  useEffect(() => {
+    const id = setInterval(() => setIndex((i) => (i + 1) % HEADLINE_WORDS.length), 2500);
+    return () => clearInterval(id);
+  }, []);
+  // key remounts the span, which replays the entrance animation
+  return (
+    <span key={index} className={styles.heroWord}>
+      {HEADLINE_WORDS[index]}
+    </span>
+  );
+}
+
 function HomepageHeader() {
   const {siteConfig} = useDocusaurusContext();
   return (
@@ -17,10 +33,10 @@ function HomepageHeader() {
       <HeroBackground />
       <div className="container text--center" style={{position: 'relative', zIndex: 1}}>
         <h1 className={styles.heroTitle} data-aos="fade-up">
-          Building the Future, One Line of Code at a Time
+          Turn ideas into <RotatingWord />.
         </h1>
         <p className={styles.heroSubtitle} data-aos="fade-up" data-aos-delay="200">
-          Passionate programmer exploring the world of software development.
+          Passionate programmer exploring software development, from clean backend to polished interface.
         </p>
         <div className="mt-8" data-aos="fade-up" data-aos-delay="300">
           <HeroTerminal />
