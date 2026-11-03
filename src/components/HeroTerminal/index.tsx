@@ -25,13 +25,16 @@ const DEFAULT_CODE = `class Feature:
         return requirements.to_reality()
 
     def test(self):
-        return "All tests passed"
-
-    def fix(self):
-        raise NotImplementedError
+        assert self.idea, "No idea, no test"
+        return True
 
     def deploy(self):
-        return "Shipped to production"`;
+        if self.test():
+            return "Shipped to production"
+        raise RuntimeError("Fix first")
+
+    def fix(self):
+        raise NotImplementedError`;
 
 export default function HeroTerminal({
   code = DEFAULT_CODE,
@@ -87,7 +90,7 @@ export default function HeroTerminal({
         <div className="w-3 h-3 rounded-full bg-red-500/80" />
         <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
         <div className="w-3 h-3 rounded-full bg-green-500/80" />
-        <span className="ml-2 text-sm text-white/40 font-mono">developer.py</span>
+        <span className="ml-2 text-sm text-white/40 font-mono">feature.py</span>
       </div>
 
       {/* Terminal Content */}
