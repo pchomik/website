@@ -18,10 +18,10 @@ const FeatureList: FeatureItem[] = [
     ),
   },
   {
-    title: 'Tilo',
+    title: 'ssh2rs',
     description: (
       <>
-        TILO is a Python-based Tiling Windows Manager for Windows OS. It offers a convenient way to manage windows using only your keyboard, inspired by projects like komorebi and JigsawWM.
+        ssh2rs is an easy and fast SSH2 client for Python, written in Rust. Run commands on remote hosts with a sync or async API.
       </>
     ),
   },

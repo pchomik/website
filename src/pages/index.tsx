@@ -53,11 +53,11 @@ const projects = [
     ),
   },
   {
-    title: 'Tilo',
+    title: 'ssh2rs',
     description:
-      'A simple tiling window manager for Windows written in Python.',
-    link: '/docs/tilo/about',
-    githubUrl: null, // Disabled - repository is private
+      'An easy and fast SSH2 client for Python, written in Rust.',
+    link: '/docs/ssh2rs/about',
+    githubUrl: 'https://github.com/pchomik/ssh2rs',
     icon: (
       <svg
         className="w-12 h-12 text-primary"
@@ -68,9 +68,8 @@ const projects = [
         strokeWidth="2"
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg">
-        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
-        <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
-        <line x1="12" y1="12" x2="12" y2="22.08"></line>
+        <polyline points="4 17 10 11 4 5"></polyline>
+        <line x1="12" y1="19" x2="20" y2="19"></line>
       </svg>
     ),
   },

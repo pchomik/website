@@ -804,16 +804,20 @@ strong {
 }
 
 .markdown table {
+    display: table;
     width: 100%;
     border-collapse: collapse;
     margin: 1.5rem 0;
-    background-color: var(--muted);
-    border-radius: var(--radius);
-    overflow: hidden;
+    background-color: var(--card);
+    border: 1px solid var(--border);
 }
 
 .markdown table thead {
     background-color: var(--accent);
+}
+
+.markdown table tr:nth-child(2n) {
+    background-color: transparent;
 }
 
 .markdown table th {
@@ -828,10 +832,6 @@ strong {
     padding: 0.75rem 1rem;
     color: var(--foreground);
     border-bottom: 1px solid var(--muted);
-}
-
-.markdown table tr:last-child td {
-    border-bottom: none;
 }
 
 .markdown img {

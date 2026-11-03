@@ -122,9 +122,9 @@ const config: Config = {
                 },
                 {
                     type: "docSidebar",
-                    sidebarId: "tiloSidebar",
+                    sidebarId: "ssh2rsSidebar",
                     position: "left",
-                    label: "tilo",
+                    label: "ssh2rs",
                 },
                 {
                     type: "docSidebar",
