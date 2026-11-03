@@ -20,12 +20,12 @@ jobs:
         steps:
             - name: checkout
               uses: actions/checkout@v4
-            - name: setup bun
-              uses: oven-sh/setup-bun@v2
+            - name: setup mise
+              uses: jdx/mise-action@v2
             - name: install
-              run: bun install
+              run: pnpm install --frozen-lockfile
             - name: build
-              run: bun run build
+              run: pnpm build
             - name: upload
               uses: actions/upload-pages-artifact@v3
               with:
